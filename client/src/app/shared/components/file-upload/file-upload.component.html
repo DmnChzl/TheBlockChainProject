@@ -1,0 +1,15 @@
+<div
+  #dropZone
+  id="dropzone"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  [class.is-dragging]="isDragging()"
+>
+  <div class="dropzone__icon">
+    <heroicons-cloud-arrow [width]="32" [height]="32" />
+  </div>
+  <p class="dropzone__description">{{ description() }}</p>
+  <button class="dropzone__button" type="button" (click)="fileInput.click()">Browser File</button>
+  <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+</div>

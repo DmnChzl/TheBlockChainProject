@@ -1,0 +1,19 @@
+<div class="grid grid-cols-2 h-[calc(100vh-200px)] pr-10">
+  <div #leftView class="relative flex-1 scrollbar-none min-w-0 overflow-y-auto" (scroll)="onLeftScroll($event)">
+    <span class="absolute h-full min-w-px mx-10 bg-(--divider-color)" aria-hidden="true"></span>
+
+    @for (item of leftItems(); track item.index) {
+      <app-list-item [item]="item" (clicked)="handleClickItem(item.index)" />
+    }
+  </div>
+
+  @if (!rightItemsEmpty()) {
+    <div #rightView class="relative flex-1 scrollbar-none min-w-0 overflow-y-auto" (scroll)="onRightScroll($event)">
+      <span class="absolute h-full min-w-px mx-10 bg-(--divider-color)" aria-hidden="true"></span>
+
+      @for (item of rightItems(); track item.index) {
+        <app-list-item [item]="item" (clicked)="handleClickItem(item.index)" />
+      }
+    </div>
+  }
+</div>

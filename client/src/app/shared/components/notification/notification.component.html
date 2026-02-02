@@ -1,0 +1,16 @@
+@if (hasNotification()) {
+  <div class="notification">
+    <span class="notification__icon">
+      @if (isSuccess()) {
+        <heroicons-check-circle />
+      } @else if (isDanger()) {
+        <heroicons-cross-circle />
+      } @else if (isWarning()) {
+        <heroicons-exclamation-triangle />
+      } @else {
+        <heroicons-info-circle />
+      }
+    </span>
+    <p class="notification__message">{{ message() }}</p>
+  </div>
+}

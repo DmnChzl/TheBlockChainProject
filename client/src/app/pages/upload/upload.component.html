@@ -1,0 +1,59 @@
+<app-main-layout title="The Chain - Upload">
+  <div class="grid md:grid-cols-2 h-full divide-y md:divide-y-0 md:divide-x divide-(--divider-color)">
+    <div id="main-wrapper" class="relative flex">
+      <app-icon-diamond
+        [width]="12"
+        [height]="12"
+        viewBox="12 0 24 24"
+        className="absolute -top-px -right-[6px] text-(--divider-color) invisible md:visible rotate-90"
+      />
+      <app-icon-diamond
+        [width]="12"
+        [height]="12"
+        viewBox="12 0 24 24"
+        className="absolute -bottom-px -right-[6px] text-(--divider-color) invisible md:visible -rotate-90"
+      />
+      <app-icon-diamond
+        [width]="12"
+        [height]="12"
+        viewBox="12 0 24 24"
+        className="absolute -bottom-[6px] -left-px text-(--divider-color) md:invisible"
+      />
+      <app-icon-diamond
+        [width]="12"
+        [height]="12"
+        viewBox="12 0 24 24"
+        className="absolute -bottom-[6px] -right-px text-(--divider-color) md:invisible rotate-180"
+      />
+
+      <div class="h-full w-full p-10">
+        <app-file-upload description="Drag & Drop to Upload File or" (fileSelected)="handleFileSelected($event)" />
+      </div>
+    </div>
+
+    <div class="h-full w-full">
+      <app-blockchain-widget />
+
+      @if (isFileSelected()) {
+        <div id="file-wrapper" class="relative flex border-t border-(--divider-color)">
+          <app-icon-diamond
+            [width]="12"
+            [height]="12"
+            viewBox="12 0 24 24"
+            className="absolute -top-[6px] -left-px text-(--divider-color)"
+          />
+          <app-icon-diamond
+            [width]="12"
+            [height]="12"
+            viewBox="12 0 24 24"
+            className="absolute -top-[6px] -right-px text-(--divider-color) rotate-180"
+          />
+
+          <app-file-info [file]="file()" (fileEnrolled)="handleEnrollFile()" (fileVerified)="handleVerifyFile()" />
+        </div>
+      }
+    </div>
+  </div>
+
+  <app-notification />
+</app-main-layout>

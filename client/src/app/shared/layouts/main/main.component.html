@@ -1,0 +1,48 @@
+<div class="flex min-h-screen min-w-screen justify-center">
+  <div class="flex-1 flex flex-col md:mx-4 max-w-[1280px] border-l border-r border-(--divider-color)">
+    <div
+      id="header-wrapper"
+      class="relative"
+      [class.border-b]="headerBorder()"
+      [class.border-(--divider-color)]="headerBorder()"
+    >
+      <app-header [theme]="theme()" (themeToggled)="onThemeToggle()" />
+
+      @if (headerBorder()) {
+        <app-icon-diamond
+          [width]="12"
+          [height]="12"
+          viewBox="12 0 24 24"
+          className="absolute -bottom-[6px] -left-px text-(--divider-color)"
+        />
+        <app-icon-diamond
+          [width]="12"
+          [height]="12"
+          viewBox="12 0 24 24"
+          className="absolute -bottom-[6px] -right-px text-(--divider-color) rotate-180"
+        />
+      }
+    </div>
+
+    <main class="flex-1">
+      <ng-content></ng-content>
+    </main>
+
+    <div id="footer-wrapper" class="relative border-t border-(--divider-color)">
+      <app-icon-diamond
+        [width]="12"
+        [height]="12"
+        viewBox="12 0 24 24"
+        className="absolute -top-[6px] -left-px text-(--divider-color)"
+      />
+      <app-icon-diamond
+        [width]="12"
+        [height]="12"
+        viewBox="12 0 24 24"
+        className="absolute -top-[6px] -right-px text-(--divider-color) rotate-180"
+      />
+
+      <app-footer />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+#dropzone {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  height: 100%;
+  width: 100%;
+  border: 1px dashed var(--txt-color-25);
+  cursor: pointer;
+
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  & .dropzone__icon {
+    padding: 1rem;
+    color: var(--txt-color-75);
+    background-color: var(--bg-color);
+    border: 1px solid var(--divider-color);
+    border-radius: 9999px;
+
+    transition-property: color, background-color, border-color, fill, stroke, transform, scale;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  & .dropzone__description {
+    color: var(--txt-color-75);
+  }
+
+  & .dropzone__button {
+    padding: 0.5rem 1rem;
+    color: var(--txt-color-75);
+    background-color: var(--bg-color);
+    outline: 1px solid var(--divider-color);
+    border-radius: 8px;
+
+    transition-property: color, background-color, outline-color, outline-width, transform, scale;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  & .dropzone__button:hover {
+    color: var(--bg-color);
+    background-color: var(--txt-color);
+    outline-width: 2px;
+    transform: scale(1.05);
+  }
+}
+
+#dropzone:hover,
+#dropzone.is-dragging {
+  border-color: var(--primary-color);
+  background-color: var(--bg-primary-color);
+
+  & .dropzone__icon {
+    color: var(--bg-color);
+    background-color: var(--txt-color);
+    border-color: transparent;
+    transform: scale(1.05);
+  }
+
+  & .dropzone__button {
+    outline-color: transparent;
+  }
+}

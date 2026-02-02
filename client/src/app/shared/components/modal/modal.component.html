@@ -1,0 +1,38 @@
+@if (modalService.isOpen()) {
+  <div class="modal__backdrop" (click)="handleClick($event)">
+    <div class="modal">
+      <div class="modal__header">
+        <span class="modal__header-icon">
+          <app-icon [name]="modalService.config().icon ?? 'info-circle'" />
+        </span>
+
+        @if (modalService.config().isCloseable) {
+          <button
+            class="modal__header-close"
+            type="button"
+            aria-label="Close Modal"
+            title="Close Modal"
+            (click)="close()"
+          >
+            <app-icon name="cross" [width]="20" [height]="20" />
+          </button>
+        }
+      </div>
+
+      @if (modalService.config().title || modalService.config().description) {
+        <div class="modal__body">
+          @if (modalService.config().title) {
+            <span class="modal__body-title">{{ modalService.config().title }}</span>
+          }
+          @if (modalService.config().description) {
+            <p class="modal__body-description">
+              {{ modalService.config().description }}
+            </p>
+          }
+        </div>
+      }
+
+      <ng-content></ng-content>
+    </div>
+  </div>
+}

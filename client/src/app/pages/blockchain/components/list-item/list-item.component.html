@@ -1,0 +1,27 @@
+<div class="group flex cursor-pointer" (click)="clicked.emit()">
+  <div class="relative min-w-px mx-10 bg-(--divider-color)">
+    <app-icon-diamond
+      [width]="12"
+      [height]="12"
+      className="absolute top-1/2 -translate-y-1/2 -left-[6px] text-(--divider-color) group-hover:text-(--primary-color) transition-colors"
+    />
+  </div>
+
+  @if (hasTitle()) {
+    <div class="flex flex-col gap-y-2 my-4 overflow-x-hidden">
+      <div class="flex items-center gap-x-2">
+        <span class="text-(--txt-color-50) group-hover:text-(--primary-color) transition-colors">
+          #{{ item()?.index }}
+        </span>
+        <span class="text-(--txt-color) truncate">{{ item()?.title }}</span>
+      </div>
+
+      @if (hasSubTitle()) {
+        <div class="flex items-center gap-x-2">
+          <span class="text-(--txt-color-50)">Created:</span>
+          <span class="text-(--txt-color)">{{ item()?.subTitle }}</span>
+        </div>
+      }
+    </div>
+  }
+</div>

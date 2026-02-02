@@ -1,0 +1,71 @@
+<app-main-layout title="The Chain - BlockChain" [headerBorder]="false">
+  <div id="search-wrapper" class="relative border-b border-(--divider-color)">
+    <div class="flex p-5">TODO: Search Component</div>
+    <app-icon-diamond
+      [width]="12"
+      [height]="12"
+      viewBox="12 0 24 24"
+      className="absolute -bottom-[6px] -left-px text-(--divider-color)"
+    />
+    <app-icon-diamond
+      [width]="12"
+      [height]="12"
+      viewBox="12 0 24 24"
+      className="absolute -bottom-[6px] -right-px text-(--divider-color) rotate-180"
+    />
+  </div>
+
+  <app-list-view [items]="allItems()" (clicked)="handleClickItem($event)" />
+
+  <app-modal>
+    @if (selectedBlock()) {
+      <div class="flex flex-col gap-y-5">
+        <div class="flex items-center gap-x-2">
+          <span class="text-(--txt-color-50)">Hash&nbsp;:</span>
+          <span class="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-[8px] overflow-x-scroll scrollbar-none">
+            {{ selectedBlock()?.hash }}
+          </span>
+          <button
+            class="text-(--txt-color-50) hover:text-(--txt-color) transition-colors"
+            type="button"
+            (click)="copyText(selectedBlock()?.hash || '')"
+            aria-label="Copy Prev Hash"
+            title="Copy Prev Hash"
+          >
+            <heroicons-clipboard />
+          </button>
+        </div>
+
+        <div class="flex items-center gap-x-2">
+          <span class="text-(--txt-color-50) whitespace-nowrap">Prev Hash&nbsp;:</span>
+          <span class="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-[8px] overflow-x-scroll scrollbar-none">
+            {{ selectedBlock()?.prevHash || 'Original' }}
+          </span>
+
+          @if (selectedBlock()?.prevHash) {
+            <button
+              class="text-(--txt-color-50) hover:text-(--txt-color) transition-colors"
+              type="button"
+              (click)="copyText(selectedBlock()?.prevHash || '')"
+              aria-label="Copy Prev Hash"
+              title="Copy Prev Hash"
+            >
+              <heroicons-clipboard />
+            </button>
+          }
+        </div>
+
+        <div class="flex gap-x-2">
+          <span class="text-(--txt-color-50)">Created At&nbsp;:</span>
+          <span>{{ selectedBlock()?.dateTime }}</span>
+        </div>
+      </div>
+    }
+
+    <div class="flex justify-end gap-x-5 mt-5">
+      <app-button (clicked)="closeModal()">Okay</app-button>
+    </div>
+  </app-modal>
+
+  <app-notification />
+</app-main-layout>

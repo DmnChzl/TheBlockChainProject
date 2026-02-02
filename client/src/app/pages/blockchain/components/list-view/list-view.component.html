@@ -1,0 +1,13 @@
+@if (isMobile()) {
+  <div class="grid h-[calc(100vh-200px)] w-[calc(100vw-2px)] pr-10">
+    <div #mobileView class="relative flex-1 scrollbar-none overflow-y-auto">
+      <span class="absolute h-full w-px mx-10 bg-(--divider-color)" aria-hidden="true"></span>
+
+      @for (item of items(); track item.index) {
+        <app-list-item [item]="item" (clicked)="handleClickItem(item.index)" />
+      }
+    </div>
+  </div>
+} @else {
+  <app-dual-list-view [leftItems]="leftItems()" [rightItems]="rightItems()" (clicked)="handleClickItem($event)" />
+}
