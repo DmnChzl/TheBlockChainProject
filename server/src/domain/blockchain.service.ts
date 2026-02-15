@@ -99,6 +99,3 @@ export class BlockChainService {
     }
   }
 }
-
-const blockChainService = new BlockChainService(new BlockChain());
-export default blockChainService;

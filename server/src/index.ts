@@ -1,9 +1,18 @@
 import { cors } from "@elysiajs/cors";
 import { Elysia } from "elysia";
-import blockChainService from "./domain/blockchain.service";
+import { BlockChain } from "./domain/blockchain";
+import { BlockChainService } from "./domain/blockchain.service";
+import { BlockRepository } from "./infrastructure/block.repository";
+import { database } from "./infrastructure/config";
+import { blockTable } from "./infrastructure/schema";
 import { createBlockChainRoute } from "./routes/api/blockchain.route";
 import { createEnrollRoute } from "./routes/api/enroll.route";
 import { createVerifyRoute } from "./routes/api/verify.route";
+import type { FileRecord } from "./routes/payloads/fileRecord";
+
+// const blockRepository = new BlockRepository(database, blockTable);
+const blockChain = new BlockChain<FileRecord>();
+const blockChainService = new BlockChainService(blockChain);
 
 const { server } = new Elysia()
   .use(
