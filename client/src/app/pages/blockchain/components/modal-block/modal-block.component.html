@@ -1,0 +1,47 @@
+<app-modal>
+  <div class="flex flex-col gap-y-5">
+    <div class="flex items-center gap-x-2">
+      <span class="text-(--txt-color-50)">Hash&nbsp;:</span>
+      <span class="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-[8px] overflow-x-scroll scrollbar-none">
+        {{ block()?.hash }}
+      </span>
+      <button
+        class="text-(--txt-color-50) hover:text-(--txt-color) transition-colors"
+        type="button"
+        (click)="copyText(block()?.hash || '')"
+        aria-label="Copy Prev Hash"
+        title="Copy Prev Hash"
+      >
+        <heroicons-clipboard />
+      </button>
+    </div>
+
+    <div class="flex items-center gap-x-2">
+      <span class="text-(--txt-color-50) whitespace-nowrap">Prev Hash&nbsp;:</span>
+      <span class="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-[8px] overflow-x-scroll scrollbar-none">
+        {{ block()?.prevHash || 'Original' }}
+      </span>
+
+      @if (block()?.prevHash) {
+        <button
+          class="text-(--txt-color-50) hover:text-(--txt-color) transition-colors"
+          type="button"
+          (click)="copyText(block()?.prevHash || '')"
+          aria-label="Copy Prev Hash"
+          title="Copy Prev Hash"
+        >
+          <heroicons-clipboard />
+        </button>
+      }
+    </div>
+
+    <div class="flex gap-x-2">
+      <span class="text-(--txt-color-50)">Created At&nbsp;:</span>
+      <span>{{ block()?.dateTime }}</span>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-x-5 mt-5">
+    <app-button (clicked)="closeModal()">Okay</app-button>
+  </div>
+</app-modal>

@@ -1,26 +1,25 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { ClipBoardIconComponent, DiamondIconComponent } from '@shared/components/icons';
+import { Component, computed, inject, model, signal } from '@angular/core';
+import { DiamondIconComponent } from '@shared/components/icons';
 import { NotificationComponent } from '@shared/components/notification';
-import { NotificationService } from '@shared/services/notification.service';
-import { ButtonComponent } from '@shared/components/button';
-import { ModalComponent } from '@shared/components/modal/modal.component';
 import { MainLayoutComponent } from '@shared/layouts/main';
 import { Block } from '@shared/models/blockchain.model';
 import { FileRecord } from '@shared/models/file-record.model';
 import { BlockChainService } from '@shared/services/blockchain.service';
 import { ModalService } from '@shared/services/modal.service';
+import { NotificationService } from '@shared/services/notification.service';
 import * as DateUtils from '@shared/utils/dateUtils';
 import { ListItem } from './components/list-item/list-item.model';
 import { ListViewComponent } from './components/list-view';
+import { ModalBlockComponent } from './components/modal-block/modal-block.component';
+import { SearchFilterComponent } from './components/search-filter';
 
 const fromBlockToItem = <T>(block: Block<T>): ListItem => {
   const title = `${block.hash.substring(0, 16)} ... ${block.hash.substring(block.hash.length - 16)}`;
-  const subTitle = DateUtils.formatDateTime(block.timestamp);
 
   return {
     index: block.index,
     title,
-    subTitle,
+    subTitle: DateUtils.formatDateTime(block.timestamp),
   };
 };
 
@@ -33,12 +32,11 @@ type BlockWithDateTime<T> = Block<T> & {
   standalone: true,
   imports: [
     MainLayoutComponent,
-    ButtonComponent,
-    ClipBoardIconComponent,
     ListViewComponent,
-    ModalComponent,
     NotificationComponent,
     DiamondIconComponent,
+    SearchFilterComponent,
+    ModalBlockComponent,
   ],
   templateUrl: './blockchain.component.html',
 })
@@ -47,9 +45,15 @@ export class BlockChainPageComponent {
   private modalService = inject(ModalService);
   private notificationService = inject(NotificationService);
 
+  searchFilter = model('');
+  selectedBlock = signal<BlockWithDateTime<FileRecord> | null>(null);
+
   readonly blocks = computed(() => this.blockChainService.state().blocks);
-  readonly selectedBlock = signal<BlockWithDateTime<FileRecord> | null>(null);
-  readonly allItems = computed(() => this.blocks().map(fromBlockToItem));
+  readonly allItems = computed(() => {
+    return this.blocks()
+      .filter(({ hash, prevHash }) => hash.includes(this.searchFilter()) || prevHash.includes(this.searchFilter()))
+      .map(fromBlockToItem);
+  });
 
   constructor() {
     this.blockChainService.load();
@@ -64,14 +68,11 @@ export class BlockChainPageComponent {
     this.modalService.open({ icon: 'cube', title: `Block #${blockIndex}` });
   }
 
-  closeModal() {
-    this.modalService.close();
+  resetSelectedBlock() {
     this.selectedBlock.set(null);
   }
 
-  copyText(text: string) {
-    navigator.clipboard.writeText(text).then(() => {
-      this.notificationService.info('Copied!');
-    });
+  notifyCopy() {
+    this.notificationService.info('Copied!');
   }
 }
