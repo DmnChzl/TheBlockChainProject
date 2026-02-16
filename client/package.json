@@ -1,13 +1,16 @@
 {
-  "name": "the-chain-client",
-  "version": "0.0.1",
+  "name": "chain-client",
+  "version": "0.1.0",
   "description": "The BlockChain Project's Client",
+  "author": "Damien Chazoule <dmnchzl@pm.me>",
+  "repository": "https://github.com/dmnchzl/theblockchainproject.git",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
     "build": "ng build",
     "build:watch": "ng build --watch --configuration development",
     "test": "ng test --ui",
+    "test:browser": "playwright test --ui",
     "lint": "oxlint src",
     "format": "prettier src --write"
   },
@@ -25,18 +28,20 @@
     "@angular/build": "^21.1.0",
     "@angular/cli": "^21.1.0",
     "@angular/compiler-cli": "^21.1.0",
+    "@playwright/test": "^1.58.0",
     "@tailwindcss/postcss": "^4.1.15",
     "@testing-library/angular": "^19.1.0",
     "@testing-library/jest-dom": "^6.9.0",
     "@testing-library/user-event": "^14.6.0",
+    "@types/node": "^25.2.0",
     "@vitest/ui": "^4.0.15",
     "jsdom": "^28.0.0",
     "oxlint": "^1.43.0",
+    "playwright": "^1.58.0",
     "postcss": "^8.5.5",
     "tailwindcss": "^4.1.15",
     "typescript": "~5.9.3",
     "vitest": "^4.0.15"
   },
-  "license": "WTFPL",
-  "private": true
+  "license": "MIT"
 }

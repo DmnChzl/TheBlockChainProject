@@ -23,10 +23,15 @@ export class ModalBlockComponent {
   copied = output();
   closed = output();
 
-  copyText(text: string) {
-    navigator.clipboard.writeText(text).then(() => {
-      this.copied.emit();
-    });
+  async copyText(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.warn((err as Error).message);
+    }
+
+    this.copied.emit();
   }
 
   closeModal() {

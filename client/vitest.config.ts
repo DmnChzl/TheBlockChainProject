@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    exclude: ['./src/test/pages'],
     setupFiles: ['./src/test/setup.ts'],
   },
 });

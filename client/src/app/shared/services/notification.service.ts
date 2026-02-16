@@ -13,7 +13,7 @@ interface Notification {
 export class NotificationService {
   notification = signal<Notification | null>(null);
 
-  private timer: number | undefined = undefined;
+  private timer: ReturnType<typeof setTimeout> | undefined = undefined;
 
   show(message: string, type: NotificationType, duration = 5000) {
     if (this.timer) clearTimeout(this.timer);

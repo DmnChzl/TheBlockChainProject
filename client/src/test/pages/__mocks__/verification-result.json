@@ -1,0 +1,10 @@
+{
+  "status": "fulfilled",
+  "data": {
+    "blockHash": "5d8f28bdc67717fbd1586d67c949b4d4af318e9ee15e8b5a751b491d584a4887",
+    "blockIndex": 1,
+    "fileName": "helloworld.txt",
+    "isChainValid": true,
+    "timestamp": 1770377400000
+  }
+}

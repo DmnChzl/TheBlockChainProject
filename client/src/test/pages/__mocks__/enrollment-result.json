@@ -1,0 +1,9 @@
+{
+  "status": "fulfilled",
+  "data": {
+    "blockHash": "3f3b73521188431f604f717485d0384ffa2ab41d5dce8bcf20261082bcc9c564",
+    "blockIndex": 5,
+    "timestamp": 1771327800000,
+    "totalBlocks": 6
+  }
+}
