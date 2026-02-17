@@ -22,6 +22,7 @@ services:
       - ./server/data:/app/data
     environment:
       - DATABASE_URL=/app/data/db.sqlite
+      - NODE_ENV=production
     networks:
       - app-network
 

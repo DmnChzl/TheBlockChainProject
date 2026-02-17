@@ -9,6 +9,7 @@ import { createBlockChainRoute } from "./routes/api/blockchain.route";
 import { createEnrollRoute } from "./routes/api/enroll.route";
 import { createVerifyRoute } from "./routes/api/verify.route";
 import type { FileRecord } from "./routes/payloads/fileRecord";
+import { loggerPlugin } from "./routes/plugins/logger.plugin";
 
 const blockRepository = new BlockRepository(database, blockTable);
 const blockChain = new BlockChain<FileRecord>();
@@ -25,6 +26,7 @@ const { server } = new Elysia()
     }),
   )
   .get("/health", () => ({ message: "Healthy" }))
+  .use(loggerPlugin({ enabled: process.env.NODE_ENV !== "production" }))
   .use(createBlockChainRoute(blockChainService))
   .use(createEnrollRoute(blockChainService))
   .use(createVerifyRoute(blockChainService))
